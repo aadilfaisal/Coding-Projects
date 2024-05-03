@@ -1,0 +1,1 @@
+The project is a web-based inventory management system utilizing HTML, CSS, and JavaScript for the frontend, with Python Flask serving as middleware and SQLAlchemy for database management. It provides a user-friendly interface for tracking stock levels, updating product information, and generating reports, streamlining inventory operations efficiently.
