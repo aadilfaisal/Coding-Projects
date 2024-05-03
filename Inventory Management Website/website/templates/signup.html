@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InventoryEase - Sign Up</title>
+    
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    /* Header Styles */
+    header {
+        background-color: #3498db;
+        color: white;
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    header img {
+        height: 50px;
+    }
+    
+    header input[type="text"] {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        width: 250px;
+    }
+    
+    header button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #2ecc71;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    header button:hover {
+        background-color: #27ae60;
+    }
+    
+    /* Main Content Styles */
+    main {
+        padding: 20px;
+    }
+    
+    main input[type="text"],
+    main input[type="password"] {
+        margin-bottom: 10px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        width: 100%;
+    }
+    
+    main button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: #3498db;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    main button:hover {
+        background-color: #2980b9;
+    }
+    
+    /* Footer Styles */
+    footer {
+        background-color: #34495e;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+</style>
+<body>
+    <header>
+        <img src="static/images/Designer.png" alt="InventoryEase Logo">
+    </header>
+    <main class="container">
+        <form action="/signup" method="post"> <!-- Specify the action and method -->
+            <input type="text" name="first_name" placeholder="Name"> <!-- Added name attribute for form submission -->
+            <input type="number" name="phone" placeholder="Phone Number"> <!-- Added name attribute for form submission -->
+            <input type="text" name="address" placeholder="Address"> <!-- Added name attribute for form submission -->
+            <input type="password" name="password1" placeholder="Create Password"> <!-- Added name attribute for form submission -->
+            <input type="password" name="password2" placeholder="Confirm Password"> <!-- Added name attribute for form submission -->
+            <button type="submit">Create Account</button> <!-- Changed the button type to submit -->
+        </form>
+    </main>
+    <footer>
+        <div class="container">
+            <!-- Footer Content -->
+        </div>
+    </footer>
+</body>
+</html>

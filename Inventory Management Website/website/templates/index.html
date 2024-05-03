@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InventoryEase - Home</title>
+    
+</head>
+<style>
+ body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Change body background to black */
+    color: #808080; /* Change default text color to grey */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #808080; /* Change header background to grey */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {
+    height: 50px;
+}
+
+header input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+}
+
+header button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #390707;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+header button:hover {
+    background-color: #390707;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+    background-color: #000; /* Change main background to black */
+    color: #808080; /* Change main text color to grey */
+}
+
+main input[type="text"],
+main input[type="password"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+main button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #390707;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+main button:hover {
+    background-color: #4f0808;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #808080; /* Change footer background to grey */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.product img {max-width: 100px; height: auto;}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap */
+    gap: 20px; /* Add some space between items */
+}
+
+.product {
+    flex: 0 0 calc(33.33% - 20px); /* Set a flexible width for each item */
+    padding: 10px; /* Add some padding around items */
+    border: 1px solid #390707; /* Add a border for clarity */
+}
+
+.product img {
+    max-width: 100%; /* Ensure images don't exceed their container */
+}
+
+.product h3 {
+    margin-top: 10px; /* Add some space above the heading */
+    font-size: 18px; /* Adjust heading size if needed */
+}
+
+.product p {
+    margin: 5px 0; /* Add some margin around the paragraph */
+}
+
+.product button {
+    display: block; /* Make buttons full width */
+    width: 50%;
+    padding: 8px 10px; /* Add some padding to buttons */
+    background-color: #007bff; /* Add a background color */
+    color: #fff; /* Set text color to white */
+    border: none; /* Remove button border */
+    border-radius: 5px; /* Add some border radius for a rounded look */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s; /* Add a smooth transition effect */
+}
+
+.product button:hover {
+    background-color: #0056b3; /* Darken background color on hover */
+}
+</style>
+<body>
+    <header>
+        <img src="static/images/Designer.png" alt="InventoryEase Logo">
+        <input type="text" placeholder="Search Products">
+        <div>
+            <button onclick="window.location.href='/cart'">Cart</button>
+            <button onclick="window.location.href='/profile'">Profile</button>
+        </div>
+    </header>
+    <main class="container">
+        <!-- Iterate over each product and display -->
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product">
+                <img src="{{ url_for('static', filename='images/' + product.image_url) }}" alt="{{ product.product_name }}">
+
+                <h3>{{ product.product_name }}</h3>
+                <span>${{ product.product_price }}</span>
+                <p>Available Quantity: {{ product.quantity_available }}</p>
+                <!-- Add to Cart button -->
+                <form action="{{ url_for('views.home') }}" method="POST">
+                    <input type="hidden" name="product_id" value="{{ product.product_id }}">
+                    <button type="submit">Add to Cart</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3>About InventoryEase</h3>
+                    <p>InventoryEase is an online inventory management system designed to streamline your business operations.</p>
+                </div>
+                <div class="footer-section links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/cart">Cart</a></li>
+                        <li><a href="/profile">Profile</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@inventoryease.com</p>
+                    <p>Phone: +1234567890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 InventoryEase | All rights reserved
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    // JavaScript code for search functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const input = document.querySelector('header input[type="text"]');
+        const productGrids = document.querySelectorAll('.product-grid');
+
+        input.addEventListener('input', function () {
+            const searchTerm = input.value.toLowerCase().trim();
+
+            productGrids.forEach(function (grid) {
+                const products = grid.querySelectorAll('.product');
+
+                products.forEach(function (product) {
+                    const productName = product.querySelector('h3').textContent.toLowerCase();
+                    const isVisible = productName.includes(searchTerm);
+
+                    product.style.display = isVisible ? 'block' : 'none';
+                });
+            });
+        });
+    });
+</script>
+</html>
