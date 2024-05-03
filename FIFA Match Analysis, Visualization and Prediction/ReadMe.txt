@@ -1,0 +1,1 @@
+This Project implements Data Mining Concepts on existing World Cup Data to analyze, visualize and predict FIFA Matches. Three Algorithms are used for prediction : HistGradientBoosting, RandomForest, Logistic Regression
