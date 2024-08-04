@@ -1,0 +1,17 @@
+<!-- faculty_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faculty Form</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h2>Faculty Information</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
